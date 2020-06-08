@@ -1,0 +1,16 @@
+.login-card {
+  max-width: 500px;
+  margin: auto;
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+.login-title {
+  margin-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+

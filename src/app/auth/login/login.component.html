@@ -1,0 +1,50 @@
+<div class="container-fluid login-title">
+  <div class="login-title text-center">
+    <h1 class="title usgm-font-dark">Log In</h1>
+  </div>
+</div>
+<div class="row-eq-height">
+  <form class="mt-16" #f="ngForm" novalidate (ngSubmit)="f.form.valid && userLogin()"
+    class="col-sm login-card card pb-5 pt-3">
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" name="email" [(ngModel)]="loginForm.email" autocomplete="false" required email
+        tabindex="1" #email="ngModel" maxlength="100" [ngClass]="{
+                          'is-invalid': f.submitted && email.invalid
+                      }" />
+      <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+      <ng-container *ngIf="f.submitted && email.invalid">
+        <mat-error *ngIf="email?.errors?.required">
+          <!-- {{ "user.email" | translate }} -->
+          <!-- {{ "NAV.isRequired" | translate }} -->
+        </mat-error>
+        <mat-error *ngIf="email?.errors?.email">
+          <!-- {{ "user.emailValidation" | translate }} -->
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" name="password" [(ngModel)]="loginForm.passWord" #password="ngModel"
+        autocomplete="false" required minlength="6" tabindex="2" maxlength="25" length="40"
+        [type]="showPassword ? 'password' : 'text'" [ngClass]="{
+                          'is-invalid': f.submitted && password.invalid
+                      }" />
+      <mat-icon matSuffix style="cursor: pointer;" (click)="showPassword = !showPassword">
+        {{ showPassword ? "visibility" : "visibility_off"}}</mat-icon>
+      <ng-container *ngIf="f.submitted && password.invalid">
+        <mat-error>
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <div class="form-group position-relative mt-2 text-center">
+      <button type="submit" mat-raised-button color="accent" class="submit-button accent-btn" aria-label="LOG IN">
+        Login
+      </button> <br>
+      create new user? <a [routerLink]="['/auth/register']" routerLinkActive="active">Register</a>
+    </div>
+
+  </form>
+</div>

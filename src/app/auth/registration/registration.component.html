@@ -1,0 +1,108 @@
+<div class="container-fluid login-title">
+  <div class="login-title text-center">
+    <h1 class="title usgm-font-dark">Regsitration</h1>
+  </div>
+</div>
+<div class="row-eq-height">
+  <form class="mt-16 col-sm login-card card pb-5 pt-3" #f="ngForm" novalidate
+    (ngSubmit)="f.form.valid && userRegister()">
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <input matInput placeholder="First Name" name="firstName" [(ngModel)]="registerForm.firstName"
+        autocomplete="false" required tabindex="1" #firstName="ngModel" maxlength="100" />
+      <ng-container *ngIf="f.submitted && firstName.invalid">
+        <mat-error *ngIf="firstName?.errors?.required">
+          First name is Required!!
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <input matInput placeholder="Last Name" name="lastName" [(ngModel)]="registerForm.lastName" autocomplete="false"
+        required tabindex="2" #lastName="ngModel" maxlength="100" />
+      <ng-container *ngIf="f.submitted && lastName.invalid">
+        <mat-error *ngIf="lastName?.errors?.required">
+          Last name is Required!!
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <input matInput placeholder="Email" name="email" [(ngModel)]="registerForm.email" autocomplete="false" required
+        email tabindex="3" #email="ngModel" maxlength="100" [ngClass]="{
+                          'is-invalid': f.submitted && email.invalid
+                      }" />
+      <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+      <ng-container *ngIf="f.submitted && email.invalid">
+        <mat-error *ngIf="email?.errors?.required">
+          Email is Required!!
+        </mat-error>
+        <mat-error *ngIf="email?.errors?.email">
+          Please enter validate Email!!
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <input matInput placeholder="Password" name="password" [(ngModel)]="registerForm.passWord" #password="ngModel"
+        autocomplete="false" required minlength="6" tabindex="4" maxlength="25" length="40"
+        [type]="showPassword ? 'password' : 'text'" [ngClass]="{
+                          'is-invalid': f.submitted && password.invalid
+                      }" />
+      <mat-icon matSuffix style="cursor: pointer;" (click)="showPassword = !showPassword">
+        {{ showPassword ? "visibility" : "visibility_off"}}</mat-icon>
+      <ng-container *ngIf="f.submitted && password.invalid">
+        <mat-error>
+          Password is Required!!
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <input matInput placeholder="Phone Number" type="number" name="phone" [(ngModel)]="registerForm.phone"
+        autocomplete="false" required tabindex="5" #phone="ngModel" maxlength="10" />
+      <ng-container *ngIf="f.submitted && phone.invalid">
+        <mat-error *ngIf="phone?.errors?.required">
+          Phone number is Required!!
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <input matInput placeholder="Address" name="address" [(ngModel)]="registerForm.address" autocomplete="false"
+        required tabindex="7" #address="ngModel" maxlength="100" />
+    </mat-form-field>
+
+    <mat-label>Date of Birth</mat-label>
+    <mat-form-field appearance="outline" class="form-group position-relative mt-2">
+      <input matInput type="date" name="dob" [(ngModel)]="registerForm.dob" autocomplete="false" required tabindex="9"
+        #address="ngModel" maxlength="100" />
+    </mat-form-field><br>
+
+    <div appearance="outline" class="form-group position-relative mt-2">
+      <div class="row">
+        <div class="thumb-img col-md-6" style="padding-left: 20px;">
+          <img style="width: 40px; height: 40px;" *ngIf="registerForm.image && registerForm.image"
+            [src]="registerForm.image">
+          <input class="p-0 mb-12" type="file" (change)="uploadImage($event.target.files, 'image')" style="display:none"
+            #file name="image">
+          <button mat-raised-button type="button" (click)="file.click()" color="accent">Upload Image
+          </button>
+        </div>
+        <div class="thumb-img col-md-6">
+          <img style="width: 40px; height: 40px;" *ngIf="registerForm.document && registerForm.document"
+            [src]="registerForm.document">
+          <input class="p-0 mb-12" type="file" (change)="uploadImage($event.target.files, 'document')"
+            style="display:none" #file1 name="image">
+          <button mat-raised-button type="button" (click)="file1.click()" color="accent">Upload Documnet
+          </button>
+        </div><br>
+      </div>
+    </div>
+
+    <div class="form-group position-relative mt-2 text-center">
+      <button type="submit" mat-raised-button color="accent" class="submit-button accent-btn" aria-label="LOG IN">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

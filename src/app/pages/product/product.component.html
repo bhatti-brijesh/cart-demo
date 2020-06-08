@@ -1,0 +1,94 @@
+<mat-toolbar class="toolbar" style="align-content: right;">
+  <span>Product OverView</span>
+  <div algin="right">
+    <mat-icon (click)="logout()" class="example-icon" aria-hidden="false" aria-label="Example user verified icon">
+      exit_to_app</mat-icon>
+  </div>
+</mat-toolbar>
+<div id="manageContainer" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
+  <div class="p-8" fxLayout="column" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-md="100">
+    <h3>Products Listing</h3>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <!-- location Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef> Location </th>
+        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+      </ng-container>
+
+      <!-- qty Column -->
+      <ng-container matColumnDef="qty">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let row , let i = index" attr.data-label="action">
+          <button matTooltip="add Cart" color="accent" mat-icon-button (click)="addToCart(row, 'add')">
+            <mat-icon aria-label="add">add</mat-icon>
+          </button>
+          <!-- <input type="number" placeholder="enter quantity" [(ngModel)]="quantity" /> -->
+          <button matTooltip="add Cart" color="accent" mat-icon-button (click)="addToCart(row,'remove')">
+            <mat-icon aria-label="add">remove</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div class="px-12" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end center">
+      <mat-paginator class="mat-pagination" [pageSizeOptions]="[5,10,15]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+    <br>
+
+    <h3>Add To card Products</h3>
+    <table mat-table [dataSource]="addDataSource" class="mat-elevation-z8" style="width: 100%;">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <!-- location Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef> Location </th>
+        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+      </ng-container>
+
+      <!-- qty Column -->
+      <ng-container matColumnDef="qty">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedAddCartColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedAddCartColumns;"></tr>
+    </table>
+    <div class="px-12" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="end center">
+      <mat-paginator class="mat-pagination" [pageSizeOptions]="[5,10,15]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
